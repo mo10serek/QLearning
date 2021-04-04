@@ -1,5 +1,6 @@
 import numpy
 import sys
+import math
 
 
 class td_qlearning:
@@ -60,8 +61,14 @@ class td_qlearning:
 
             state = stateAndAction.split(",")[0]
             action = stateAndAction.split(",")[1]
+            squareLocation = int(state[0]) - 1
 
-            print(state + ": " + str(self.qvalue(state, action)) + " " + str(self.policy(state)))
+            q = self.qvalue(state, action)
+            a = self.policy(state)
+
+            self.qValuesWithActions[a][squareLocation] = q
+
+            print(state + ": " + str(q) + " " + a)
 
     def qvalue(self, state, action):
         # state is a string representation of a state
@@ -91,4 +98,4 @@ class td_qlearning:
         # Return the optimal action under the learned policy
         return a
 
-td_qlearning = td_qlearning("trajectory.csv")
+td_qlearning = td_qlearning("Example2/trajectory.csv")

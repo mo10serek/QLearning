@@ -2,7 +2,7 @@ import numpy
 import sys
 import math
 
-
+#Just testing with git on vscode
 class td_qlearning:
     alpha = 0.1
     gamma = 0.5

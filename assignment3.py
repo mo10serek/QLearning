@@ -2,6 +2,7 @@ import numpy
 import sys
 import math
 
+#Just tesing
 class td_qlearning:
     alpha = 0.1
     gamma = 0.5

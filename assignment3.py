@@ -1,4 +1,4 @@
-import numpy
+#import numpy
 import sys
 import math
 
@@ -35,7 +35,8 @@ class td_qlearning:
 
         for stateAndAction in stateInAList:
 
-            if stateAndAction == '': break
+            if stateAndAction == '':
+                break
 
             state = stateAndAction.split(",")[0]
 
@@ -46,7 +47,7 @@ class td_qlearning:
             elif location == 2:
                 self.allTrajectoryIterations[state] = {"C": 0, "R": 0}
             elif location == 3:
-                self.allTrajectoryIterations[state] = {"C": 0, "D": 0, "R": 0, "L": 0, "U": 0}
+                self.allTrajectoryIterations[state] = {"C": 0, "L": 0, "R": 0, "U": 0, "D": 0}
             elif location == 4:
                 self.allTrajectoryIterations[state] = {"C": 0, "L": 0}
             elif location == 5:
@@ -54,7 +55,37 @@ class td_qlearning:
 
             self.allIterationsInOrder.append(stateAndAction)
 
-    def qvalue(self, state, action):
+
+        for stateAndAction in stateInAList:
+
+            if stateAndAction == '': break
+
+            state = stateAndAction.split(",")[0]
+            action = stateAndAction.split(",")[1]
+
+            q = self.caculatingQvalue(state, action)
+
+            if state == "300000" and action == "C":
+                print(state + " " + action + ": " + str(q))
+
+            self.allTrajectoryIterations[state][action] = q
+
+        '''q = self.qvalue("300000", "C")
+        a = self.policy("300000")
+
+        print("300000" + " " + "C" + ": " + str(q) + " " + str(a))
+
+        q = self.qvalue("300000", "R")
+        a = self.policy("410000")
+
+        print("300000" + " " + "R" + ": " + str(q) + " " + str(a))
+
+        q = self.qvalue("510100", "U")
+        a = self.policy("510100")
+
+        print("300000" + " " + "R" + ": " + str(q) + " " + str(a))'''
+
+    def caculatingQvalue(self, state, action):
         # state is a string representation of a state
         # action is a string representation of an action
 
@@ -73,7 +104,16 @@ class td_qlearning:
         self.allTrajectoryIterations[state][action] = q
 
         # Return the q-value for the state-action pair
-        return round(q, 6)
+        return q
+
+    def qvalue(self, state, action):
+        # state is a string representation of a state
+        # action is a string representation of an action
+
+        q = self.allTrajectoryIterations[state][action]
+
+        # Return the q-value for the state-action pair
+        return q
 
     def policy(self, state):
         # state is a string representation of a state
@@ -91,4 +131,4 @@ class td_qlearning:
         # Return the optimal action under the learned policy
         return action
 
-#td_qlearning = td_qlearning("Example1/trajectory.csv")
+td_qlearning = td_qlearning("Example2/trajectory.csv")

@@ -33,14 +33,18 @@ class td_qlearning:
         trajectory_filename_readable = open(trajectory_filepath, "r")
 
         stateInAList = trajectory_filename_readable.read().split("\n")
+        print(stateInAList)
 
         for stateAndAction in stateInAList:
 
             if stateAndAction == '': break
 
             state = stateAndAction.split(",")[0]
-
+            print(state)
+            
             location = int(state[0])
+
+            print(location)
 
             if location == 1:
                 self.allTrajectoryIterations[state] = {"C": 0, "D": 0}
@@ -54,6 +58,8 @@ class td_qlearning:
                 self.allTrajectoryIterations[state] = {"C": 0, "U": 0}
 
             self.allIterationsInOrder.append(stateAndAction)
+            
+        
 
     def qvalue(self, state, action):
         # state is a string representation of a state
@@ -92,4 +98,6 @@ class td_qlearning:
         # Return the optimal action under the learned policy
         return action
 
-#td_qlearning = td_qlearning("Example1/trajectory.csv")
+td_qlearning = td_qlearning("Example1/trajectory.csv")
+
+

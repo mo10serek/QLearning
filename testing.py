@@ -18,7 +18,7 @@ def compare_q_values(agent, q_value_tests_values):
   for i in range(q_value_tests_values.shape[0]):
     curr_q_value = agent.qvalue(q_value_tests_values[i, 0], q_value_tests_values[i, 1])
     q_value_diff = abs(curr_q_value - float(q_value_tests_values[i, 2]))
-    print(curr_q_value)
+    #print(curr_q_value)
     if q_value_diff < Q_VALUE_THRESHOLD:
       correct_q_values = correct_q_values + 1
     else:
